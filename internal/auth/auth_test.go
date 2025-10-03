@@ -12,7 +12,7 @@ func TestGetAPIKey(t *testing.T) {
 		r.Header.Add("Authorization", "")
 		_, err := GetAPIKey(r.Header)
 
-		if errors.Is(err, ErrNoAuthHeaderIncluded) {
+		if !errors.Is(err, ErrNoAuthHeaderIncluded) {
 			t.Error("Expected AuthHeaderNotIncluded Error but got none")
 		}
 	})
