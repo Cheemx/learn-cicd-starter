@@ -37,10 +37,11 @@ jobs:
       - name: Code formatting
         run: test -z $(go fmt ./...)
 
+      - name: Add GOPATH/bin to PATH
+        run: echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+
       - name: Install Staticcheck
-        uses: dominikh/staticcheck-action@v1
-        with:
-          version: "latest"
+        run: go install honnef.co/go/tools/cmd/staticcheck@latest
 
       - name: run staticcheck
-        run: staticckeck ./...
+        run: staticcheck ./...
